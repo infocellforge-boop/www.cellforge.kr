@@ -17,6 +17,11 @@
 ### 2.1 프론트엔드 기술 스택 (유지보수 최적화 구성)
 - **코어 마크업/스타일**: **No-Build 순수 HTML5 + 모듈형 CSS3 (CSS Variables / Grid / Flexbox)**
   - 별도의 Node.js 빌드 도구나 번들러 의존성 없이 파일을 수정하여 Push하면 즉시 반영되는 구조
+  - 브랜치 전략: `development` 브랜치에서 기능/스타일 작업 후 `main` 브랜치로 병합(Merge)하여 프로덕션 배포
+- **타이포그래피 (애플 하이브리드 폰트 스택)**:
+  - **Apple 기기 (macOS / iOS)**: 시스템 내장 `SF Pro Display`, `SF Pro Text`, `Apple SD Gothic Neo` 우선 렌더링
+  - **Windows / Android 기기**: `Inter` (영문/숫자) + `Pretendard Variable` (국문 다이나믹 서브셋 CDN) 폴백 적용
+  - **디테일 설정**: 타이트한 자간(`-0.02em ~ -0.035em`), 안티앨리어싱(`-webkit-font-smoothing: antialiased`), 한글 단어 단위 줄바꿈(`word-break: keep-all`) 적용 완료 (`assets/css/style.css`)
 - **스크롤 애니메이션 엔진**: **GSAP + ScrollTrigger (CDN 로드)**
   - 애플 스타일의 핵심인 **섹션 화면 고정(`pin: true`)** 및 **스크롤 진행률 비례 재생(`scrub`)** 구현
   - 데스크톱 및 모바일 Safari(주소창 리사이즈 등) 크로스 브라우징 이슈 자동 대응

@@ -1,0 +1,116 @@
+/* ==========================================================================
+   Cellforge Design System & Apple-Style Typography
+   ========================================================================== */
+
+:root {
+  /* Color Palette (Apple Dark Keynote Theme) */
+  --bg-primary: #000000;
+  --bg-elevated: #111113;
+  --fg-primary: #f5f5f7;
+  --fg-secondary: #86868b;
+  --fg-muted: #6e6e73;
+  --accent: #2997ff;
+
+  /* Apple Hybrid Font Stack:
+     1. Apple Native (SF Pro Display/Text, Apple SD Gothic Neo on macOS/iOS)
+     2. Cross-Platform Webfonts (Inter for EN/Numbers, Pretendard Variable for KR) */
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter",
+    "Apple SD Gothic Neo", "Pretendard Variable", "Pretendard", system-ui, sans-serif;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter",
+    "Apple SD Gothic Neo", "Pretendard Variable", "Pretendard", system-ui, sans-serif;
+
+  /* Typography Scale (Responsive Clamp) */
+  --text-hero: clamp(2.75rem, 6.5vw, 5.25rem);
+  --text-headline: clamp(2rem, 4.5vw, 3.5rem);
+  --text-title: clamp(1.375rem, 2.5vw, 2rem);
+  --text-body-lg: clamp(1.0625rem, 1.5vw, 1.3125rem);
+  --text-body: 1.0625rem;
+  --text-caption: 0.875rem;
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  background-color: var(--bg-primary);
+  color: var(--fg-primary);
+  /* Apple Typography Rendering Details */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--fg-primary);
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  overflow-x: hidden;
+}
+
+/* Apple-Style Typography Utility Classes */
+.typo-hero {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.typo-headline {
+  font-family: var(--font-display);
+  font-size: var(--text-headline);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.typo-title {
+  font-family: var(--font-display);
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.typo-body-lg {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-lg);
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: -0.015em;
+  color: var(--fg-secondary);
+}
+
+.text-gradient {
+  background: linear-gradient(180deg, #ffffff 0%, #98989d 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Initial Hero Placeholder Layout */
+.hero-placeholder {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  gap: 1rem;
+}
