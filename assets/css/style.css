@@ -280,9 +280,10 @@ img {
   letter-spacing: -0.035em;
   line-height: 1;
   color: var(--fg-primary);
-  will-change: transform, opacity;
   white-space: nowrap;
   user-select: none;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 .portal-o {
