@@ -22,6 +22,14 @@
   - **Apple 기기 (macOS / iOS)**: 시스템 내장 `SF Pro Display`, `SF Pro Text`, `Apple SD Gothic Neo` 우선 렌더링
   - **Windows / Android 기기**: `Inter` (영문/숫자) + `Pretendard Variable` (국문 다이나믹 서브셋 CDN) 폴백 적용
   - **디테일 설정**: 타이트한 자간(`-0.02em ~ -0.035em`), 안티앨리어싱(`-webkit-font-smoothing: antialiased`), 한글 단어 단위 줄바꿈(`word-break: keep-all`) 적용 완료 (`assets/css/style.css`)
+- **레이아웃 및 반응형 브레이크포인트 규격**:
+  - **컨텐츠 최대 너비 (`max-width`)**: `1280px` (PC 대화면에서 `1280px` 이상 늘어나지 않도록 중앙 고정)
+  - **컨텐츠 최소 너비 (`min-width`)**: `320px` (`320px` 이하 뷰포트에서도 레이아웃이 더 이상 찌그러지지 않도록 하한 고정)
+  - **반응형 브레이크포인트**:
+    - Desktop: `1025px` 이상 (최대 `1280px` 컨테이너, 좌우 여백 `40px`)
+    - Tablet: `1024px` 이하 (좌우 여백 `32px`)
+    - Mobile: `768px` 이하 (좌우 여백 `24px`, 단일 컬럼 전환)
+    - Small Mobile: `480px` 이하 ~ 최소 `320px` (좌우 여백 `20px`)
 - **스크롤 애니메이션 엔진**: **GSAP + ScrollTrigger (CDN 로드)**
   - 애플 스타일의 핵심인 **섹션 화면 고정(`pin: true`)** 및 **스크롤 진행률 비례 재생(`scrub`)** 구현
   - 데스크톱 및 모바일 Safari(주소창 리사이즈 등) 크로스 브라우징 이슈 자동 대응

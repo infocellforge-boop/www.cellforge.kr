@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Cellforge Design System & Apple-Style Typography
+   Cellforge Design System, Layout & Apple-Style Typography
    ========================================================================== */
 
 :root {
@@ -11,6 +11,17 @@
   --fg-muted: #6e6e73;
   --accent: #2997ff;
 
+  /* Layout & Container Constraints */
+  --container-max-width: 1280px;
+  --container-min-width: 320px;
+  --container-pad-x: 2.5rem;
+
+  /* Breakpoint Reference (used in @media queries)
+     - Desktop: > 1024px (max content width 1280px)
+     - Tablet:  <= 1024px
+     - Mobile:  <= 768px
+     - Small:   <= 480px (locked at min-width 320px) */
+
   /* Apple Hybrid Font Stack:
      1. Apple Native (SF Pro Display/Text, Apple SD Gothic Neo on macOS/iOS)
      2. Cross-Platform Webfonts (Inter for EN/Numbers, Pretendard Variable for KR) */
@@ -21,10 +32,10 @@
     "Apple SD Gothic Neo", "Pretendard Variable", "Pretendard", system-ui, sans-serif;
 
   /* Typography Scale (Responsive Clamp) */
-  --text-hero: clamp(2.75rem, 6.5vw, 5.25rem);
-  --text-headline: clamp(2rem, 4.5vw, 3.5rem);
+  --text-hero: clamp(2.5rem, 6.5vw, 5.25rem);
+  --text-headline: clamp(1.875rem, 4.5vw, 3.5rem);
   --text-title: clamp(1.375rem, 2.5vw, 2rem);
-  --text-body-lg: clamp(1.0625rem, 1.5vw, 1.3125rem);
+  --text-body-lg: clamp(1rem, 1.5vw, 1.3125rem);
   --text-body: 1.0625rem;
   --text-caption: 0.875rem;
 }
@@ -41,6 +52,7 @@
 html {
   font-family: var(--font-sans);
   font-size: 16px;
+  min-width: var(--container-min-width);
   background-color: var(--bg-primary);
   color: var(--fg-primary);
   /* Apple Typography Rendering Details */
@@ -55,14 +67,28 @@ html {
 
 body {
   min-height: 100vh;
+  min-width: var(--container-min-width);
   background-color: var(--bg-primary);
   color: var(--fg-primary);
   line-height: 1.5;
   letter-spacing: -0.02em;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
-/* Apple-Style Typography Utility Classes */
+/* ==========================================================================
+   Content Container (Min 320px ~ Max 1280px)
+   ========================================================================== */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  min-width: var(--container-min-width);
+  margin-inline: auto;
+  padding-inline: var(--container-pad-x);
+}
+
+/* ==========================================================================
+   Apple-Style Typography Utility Classes
+   ========================================================================== */
 .typo-hero {
   font-family: var(--font-display);
   font-size: var(--text-hero);
@@ -111,7 +137,13 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 2rem;
+  padding-block: 4rem;
+}
+
+.hero-placeholder .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 1rem;
 }
 
@@ -125,12 +157,10 @@ body {
   font-size: 0.8125rem;
   line-height: 1.6;
   letter-spacing: -0.01em;
-  padding: 2.5rem 1.5rem;
+  padding-block: 2.5rem;
 }
 
 .footer-inner {
-  max-width: 980px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -200,13 +230,41 @@ body {
   font-size: 0.75rem;
 }
 
-@media (max-width: 640px) {
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+
+/* Tablet (<= 1024px) */
+@media (max-width: 1024px) {
+  :root {
+    --container-pad-x: 2rem;
+  }
+}
+
+/* Mobile (<= 768px) */
+@media (max-width: 768px) {
+  :root {
+    --container-pad-x: 1.5rem;
+  }
+
+  .site-footer {
+    padding-block: 2rem;
+  }
+
   .footer-sep {
     display: none;
   }
+
   .footer-info-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.25rem;
+  }
+}
+
+/* Small Mobile (<= 480px, down to 320px min-width) */
+@media (max-width: 480px) {
+  :root {
+    --container-pad-x: 1.25rem;
   }
 }
