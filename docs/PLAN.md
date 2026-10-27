@@ -4,11 +4,11 @@
 
 | 항목 | 내용 |
 | :--- | :--- |
-| **프로젝트명** | Cellforge 공식 기업 소개 웹사이트 |
+| **프로젝트명** | Cellforge 공식 기업 및 브랜드(`ADERIS®`) 소개 웹사이트 |
 | **대상 도메인** | `www.cellforge.kr` (`cellforge.kr` 루트 도메인 자동 리다이렉트) |
 | **원격 저장소** | `https://github.com/infocellforge-boop/www.cellforge.kr.git` |
 | **호스팅 환경** | GitHub Pages (`main` 브랜치 `/` 루트 직접 서빙, `.nojekyll` 적용) |
-| **연출 방향** | 애플(Apple) 스타일의 스크롤 기반 인터랙티브 스토리텔링 |
+| **연출 방향** | 애플(Apple) 스타일의 스크롤 동기화(`Pin & Scrub`) 스토리텔링 |
 
 ---
 
@@ -30,55 +30,91 @@
     - Tablet: `1024px` 이하 (좌우 여백 `32px`)
     - Mobile: `768px` 이하 (좌우 여백 `24px`, 단일 컬럼 전환)
     - Small Mobile: `480px` 이하 ~ 최소 `320px` (좌우 여백 `20px`)
-- **스크롤 애니메이션 엔진**: **GSAP + ScrollTrigger (CDN 로드)**
-  - 애플 스타일의 핵심인 **섹션 화면 고정(`pin: true`)** 및 **스크롤 진행률 비례 재생(`scrub`)** 구현
-  - 데스크톱 및 모바일 Safari(주소창 리사이즈 등) 크로스 브라우징 이슈 자동 대응
-- **보조 인터랙션**: **IntersectionObserver API + CSS Transition**
-  - 일반 섹션의 경량 페이드인(`fade-up`), 숫자 카운트업 등 처리
+- **스크롤 애니메이션 엔진**: **GSAP 3 + ScrollTrigger (CDN 로드)**
+  - 섹션 화면 고정(`pin: true`) 및 스크롤 진행률 비례 재생(`scrub: 0.6`) 동기화
 
-### 2.2 유지보수 중심 설계 원칙
-1. **Sticky DOM + 레이어 트랜스폼 기반 연출**:
-   - 무거운 `<canvas>` 연번 이미지 시퀀스 대신, 고정(`sticky`)된 배경 비주얼 위에 **실제 HTML 타이포그래피와 그래픽 레이어의 스케일(`scale`), 투명도(`opacity`), 패럴랙스 위치(`translate3d`)**를 스크롤에 연동하여 SEO와 텍스트 수정 편의성 확보
-2. **콘텐츠(HTML)와 애니메이션 로직(JS)의 완전 분리**:
-   - JS(`js/animations.js`)는 특정 문구에 의존하지 않고 공통 데이터 속성(`data-scroll-pin`, `data-animate="fade-up"`, `data-parallax` 등)만 제어하도록 설계
-   - 추후 문구·수치·연혁 수정 시 JS 수정 없이 `index.html` 텍스트만 변경하면 즉시 반영
+---
 
-### 2.3 디렉토리 구조 (예정)
+## 3. 마스터 스크롤 시나리오 및 섹션 설계 *(확정)*
+
+### Stage 1. 인트로 포털 시퀀스 (`Pin & Scrub` 화면 고정 스크롤)
+1. **랜딩 시작 지점 (`Scroll 0%`)**:
+   - 블랙 배경 중앙에 **`Cellforge`** 사명이 선명하게 위치한 상태로 시작
+2. **`o` 문자 포털 통과 (`Scroll 0% → 45%`)**:
+   - 사용자가 스크롤을 내리면 `Cellforge`의 **`o` 글자 정중앙 홀(Hole)**을 `transform-origin` 기준점으로 삼아 사명이 기하급수적으로 확대(`scale: 1 → 85`)되며 화면이 **`o` 문자 사이를 통과**하는 연출
+3. **슬로건 점진 확대 (`Scroll 35% → 85%`)**:
+   - `o` 문자를 통과하는 순간 안쪽 깊은 곳에서 **`Forging a Brighter Tomorrow`** 문장이 처음에는 보이지 않다가(`opacity: 0, scale: 0.15`) 스크롤에 반응하여 서서히 나타나며 **화면의 50% 크기(`50vw`)까지 커진 뒤 고정**
+4. **하단 섹션으로 자연 스크롤 전환 (`Scroll 85% → 100%`)**:
+   - 슬로건이 화면 50% 크기에 도달한 후 잠시 유지되다가 고정(`pin`)이 풀리며 아래 브랜드 제품 쇼케이스로 스크롤이 이어짐
+
+### Stage 2. 플래그십 브랜드 쇼케이스 (`ADERIS®` 메인 컷)
+- **사용 에셋**: **Cut 1 (`aderis-main.jpg`)**
+- **연출**:
+  - 스크롤 진입과 함께 **`ADERIS® — Regenerative Aesthetic Matrix`** 플래그십 패키지 & 바이알 비주얼이 스케일업 등장
+  - `ADIPOSE-DERIVED EXTRACELLULAR MATRIX INJECTABLE (20 mg)` 및 핵심 가치 키워드 **`REGENERATE · INTEGRATE · RESTORE · NATURALLY`**가 스크롤에 동기화되어 순차 점등(`Scroll Text Lit-up`)
+
+### Stage 3. 제품 라인업 3종 순차 쇼케이스 (`Sticky Split / Sequential Reveal`)
+- **사용 에셋**:
+  - **Cut 2 (`aderis-ha.jpg`)**: `ADERIS® HA` (`Adipose-Derived ECM + Hyaluronic Acid`, Slate Blue 테마)
+  - **Cut 3 (`aderis-pn.jpg`)**: `ADERIS® PN` (`Adipose-Derived ECM + Polynucleotide`, Sage Green 테마)
+  - **Cut 4 (`aderis-pn-ha.jpg`)**: `ADERIS® PN-HA` (`Adipose-Derived ECM + PN + Hyaluronic Acid`, Lavender 테마)
+- **연출**:
+  - 스크롤을 내릴 때마다 좌측 고정 프리뷰(또는 순차 스테이지)에서 **Original → HA → PN → PN-HA** 각 라인업 이미지와 고유 테마 컬러 글로우가 스크롤 위치에 동기화되어 순차 전환
+
+### Stage 4. 패키지 & 크래프트맨십 디테일 5종 쇼케이스
+- **사용 에셋 (하단 캡션을 제거하고 순수 비주얼만 추출 후 HTML 타이포그래피 결합)**:
+  - **Cut 5 (`detail-cap.jpg`)**: **프리미엄 캡 디자인** — 브랜드 아이덴티티 각인
+  - **Cut 6 (`detail-finish.jpg`)**: **고급 후가공** — 엠보싱 + 부분 유광
+  - **Cut 7 (`detail-side.jpg`)**: **측면 디테일** — 미니멀한 브랜드 심볼
+  - **Cut 8 (`detail-inner.jpg`)**: **패키지 내부** — 정제된 구조와 컬러 톤
+  - **Cut 9 (`detail-motif.jpg`)**: **브랜드 그래픽 모티프** — 조직의 자연스러운 흐름을 형상화
+- **연출**:
+  - 스크롤 진행에 따라 5개의 디테일 컷 카드가 순차적으로 등장(`scrub` 스태거 패럴랙스 + 이미지 내부 미세 스케일링)
+
+### Stage 5. 푸터 (`Contact & Corporate Info`)
+- **법인명**: 주식회사 셀포지 (`CELLFORGE Inc.`)
+- **대표자**: 이창섭(공동대표), 강가운(공동대표)
+- **사업자등록번호**: `544-81-04072`
+- **주소**: 경기도 수원시 영통구 월드컵로 123, 107호(원천동, 승전빌딩)
+- **대표 이메일**: `info.cellforge@gmail.com` (`mailto:` 앵커 적용)
+
+---
+
+## 4. 디렉토리 구조
+
 ```text
 .
-├── CNAME                  # 커스텀 도메인 설정 (www.cellforge.kr)
-├── .nojekyll              # GitHub Pages Jekyll 변환 비활성화
-├── index.html             # 메인 엔트리 페이지 (기업 소개 전체 섹션)
+├── CNAME                          # 커스텀 도메인 설정 (www.cellforge.kr)
+├── .nojekyll                      # GitHub Pages Jekyll 변환 비활성화
+├── favicon.ico                    # 멀티 해상도 파비콘
+├── index.html                     # 메인 엔트리 페이지
 ├── assets/
 │   ├── css/
-│   │   └── style.css      # 디자인 시스템 변수, 레이아웃, 반응형 스타일
+│   │   └── style.css              # 디자인 시스템, 반응형(320~1280px), 스크롤 섹션 스타일
 │   ├── js/
-│   │   └── animations.js  # GSAP ScrollTrigger 및 스크롤 인터랙션 로직
-│   └── images/            # 로고, 아이콘, 고해상도 비주얼/그래픽 에셋
+│   │   └── animations.js          # GSAP ScrollTrigger 포털 인트로 및 순차 쇼케이스 로직
+│   └── img/
+│       ├── ci.png                 # Cellforge CI 원본
+│       ├── icon-c.png             # C 심볼 투명 아이콘
+│       ├── favicon.ico            # 파비콘 사본
+│       └── products/              # 분해 및 고화질 보정된 ADERIS 9개 이미지 컷
+│           ├── aderis-main.jpg
+│           ├── aderis-ha.jpg
+│           ├── aderis-pn.jpg
+│           ├── aderis-pn-ha.jpg
+│           ├── detail-cap.jpg
+│           ├── detail-finish.jpg
+│           ├── detail-side.jpg
+│           ├── detail-inner.jpg
+│           └── detail-motif.jpg
 ├── docs/
-│   └── PLAN.md            # 프로젝트 구축 및 배포 계획서
-└── README.md              # 저장소 안내 문서
+│   └── PLAN.md                    # 프로젝트 구축 및 배포 계획서
+└── README.md                      # 저장소 안내 문서
 ```
 
 ---
 
-## 3. 웹사이트 섹션 구성안 *(세부 카피 및 콘텐츠 추후 정리)*
-
-- [ ] **헤더 / 내비게이션 (GNB)**: 반투명 블러(`backdrop-filter`) 상단 고정 바, 로고 및 섹션 앵커 이동
-- [ ] **히어로 섹션 (Hero)**: 대형 타이포그래피 인트로 + 스크롤 시 확대/전환되는 핵심 비주얼
-- [ ] **기업 소개 (About / Vision)**: 스크롤 고정(`pin`) 상태에서 핵심 슬로건과 비전 문구가 순차 하이라이트되는 연출
-- [ ] **핵심 기술 / 사업 영역 (Core Technology & Solutions)**: 스크롤에 따라 전환되는 카드 또는 스티키 스플릿(좌측 고정 비주얼 + 우측 스크롤 설명) 레이아웃
-- [ ] **주요 지표 / 경쟁력 (Key Metrics & Impact)**: 스크롤 진입 시 강조되는 대형 수치 및 핵심 역량
-- [x] **문의 / 푸터 (Contact & Footer)**:
-  - **법인명**: 주식회사 셀포지 (`CELLFORGE Inc.`)
-  - **대표자**: 이창섭(공동대표), 강가운(공동대표)
-  - **사업자등록번호**: `544-81-04072`
-  - **주소**: 경기도 수원시 영통구 월드컵로 123, 107호(원천동, 승전빌딩)
-  - **대표 이메일**: `info.cellforge@gmail.com`
-
----
-
-## 4. 단계별 작업 계획 (Roadmap)
+## 5. 단계별 작업 계획 (Roadmap)
 
 ### Phase 1. 저장소 초기화 및 배포 기반 구축 (완료)
 - [x] 로컬 Git 저장소 초기화(`main`) 및 전용 계정/SSH 분리 설정
@@ -89,27 +125,17 @@
 ### Phase 2. 커스텀 도메인(`www.cellforge.kr`) 연결 (완료)
 - [x] 저장소 내 `CNAME` 파일 배포 (`www.cellforge.kr`)
 - [x] 도메인 등록업체(호스팅케이알) DNS 레코드 설정 (`www` CNAME 레코드 + `@` A 레코드)
-- [x] GitHub Pages Custom domain 검증 및 **Enforce HTTPS** 활성화 완료 (`http://` 및 `cellforge.kr` → `https://www.cellforge.kr` 301 리다이렉트 확인)
+- [x] GitHub Pages Custom domain 검증 및 **Enforce HTTPS** 활성화 완료
 
-### Phase 3. 상세 기획 및 디자인 리소스 정의 *(추후 진행)*
-- [ ] 섹션별 상세 카피라이팅 및 스토리보드(스크롤 연출 흐름) 확정
-- [ ] 브랜드 컬러 팔레트, 타이포그래피, 로고/파비콘 및 비주얼 에셋 준비
+### Phase 3. 이미지 컷 분해 및 스크롤 시나리오 설계 (진행 중)
+- [x] `ADERIS®` 9개 제품/디테일 컷 좌표 분석 및 크롭/업스케일링 추출
+- [x] `Cellforge` `o` 포털 줌인 → `Forging a Brighter Tomorrow` 50% 확대 → 9개 컷 순차 노출 시나리오 확정
 
-### Phase 4. 프론트엔드 퍼블리싱 및 스크롤 애니메이션 구현
-- [ ] `assets/css/style.css` 디자인 토큰 및 반응형 레이아웃 구축
-- [ ] 섹션별 시맨틱 HTML 마크업 작성
-- [ ] `assets/js/animations.js` GSAP `ScrollTrigger` 기반 애플 스타일 스크롤 효과 구현
-- [ ] 모바일/태블릿 뷰포트 스크롤 감도 및 반응형 최적화
+### Phase 4. 프론트엔드 퍼블리싱 및 스크롤 애니메이션 구현 (진행 중)
+- [x] `assets/css/style.css` 애플 하이브리드 폰트 및 `320px ~ 1280px` 반응형 컨테이너 구축
+- [x] 인트로 포털 섹션 및 `ADERIS®` 9개 컷 쇼케이스 HTML/CSS 마크업 구현
+- [x] `assets/js/animations.js` GSAP `ScrollTrigger` 기반 스크롤 동기화 구현
 
-### Phase 5. SEO 최적화 및 최종 오픈
-- [ ] 메타태그(`title`, `description`, Open Graph `og:*`) 및 파비콘 적용
-- [ ] `robots.txt`, `sitemap.xml`, `404.html` 구성
-- [ ] 크로스 브라우징 및 Lighthouse 성능·접근성 점검 후 최종 배포
-
----
-
-## 5. 추후 정리할 세부 사항 (TBD)
-
-1. **콘텐츠 및 카피라이팅**: 각 섹션에 들어갈 실제 기업 소개 문구, 기술 키워드, 수치 데이터
-2. **비주얼 에셋**: 히어로 및 기술 섹션에 사용할 이미지/그래픽 또는 짧은 배경 루프 영상 유무
-3. **다국어 지원 여부**: 한국어 단독 구성 여부 또는 영문(KO/EN) 전환 포함 여부
+### Phase 5. 검수 및 `main` 프로덕션 반영 (대기)
+- [ ] 로컬 서버(`npx live-server --port=8080`)에서 스크롤 감도 및 모바일 반응형 검수
+- [ ] `development` 브랜치 → `main` 브랜치 병합 및 프로덕션(`https://www.cellforge.kr`) 배포
