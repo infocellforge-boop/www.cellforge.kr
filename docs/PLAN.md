@@ -62,16 +62,16 @@
 
 ## 4. 단계별 작업 계획 (Roadmap)
 
-### Phase 1. 저장소 초기화 및 배포 기반 구축
+### Phase 1. 저장소 초기화 및 배포 기반 구축 (완료)
 - [x] 로컬 Git 저장소 초기화(`main`) 및 전용 계정/SSH 분리 설정
 - [x] 원격 저장소(`origin`) 연결 완료
 - [x] 초기 `index.html`, `README.md`, `CNAME`, `.nojekyll` 구성 및 `main` 브랜치 첫 Push 완료
-- [ ] GitHub 저장소 Settings → Pages 활성화 확인
+- [x] GitHub 저장소 Settings → Pages 활성화 확인
 
-### Phase 2. 커스텀 도메인(`www.cellforge.kr`) 연결
+### Phase 2. 커스텀 도메인(`www.cellforge.kr`) 연결 (완료)
 - [x] 저장소 내 `CNAME` 파일 배포 (`www.cellforge.kr`)
-- [ ] 도메인 등록업체 DNS 레코드 설정 (`www` CNAME 레코드 1개 + `@` A 레코드 4개)
-- [ ] GitHub Pages Custom domain 검증 및 **Enforce HTTPS** 활성화
+- [x] 도메인 등록업체(호스팅케이알) DNS 레코드 설정 (`www` CNAME 레코드 + `@` A 레코드)
+- [x] GitHub Pages Custom domain 검증 및 **Enforce HTTPS** 활성화 완료 (`http://` 및 `cellforge.kr` → `https://www.cellforge.kr` 301 리다이렉트 확인)
 
 ### Phase 3. 상세 기획 및 디자인 리소스 정의 *(추후 진행)*
 - [ ] 섹션별 상세 카피라이팅 및 스토리보드(스크롤 연출 흐름) 확정
