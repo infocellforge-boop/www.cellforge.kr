@@ -127,15 +127,15 @@
 - [x] 도메인 등록업체(호스팅케이알) DNS 레코드 설정 (`www` CNAME 레코드 + `@` A 레코드)
 - [x] GitHub Pages Custom domain 검증 및 **Enforce HTTPS** 활성화 완료
 
-### Phase 3. 이미지 컷 분해 및 스크롤 시나리오 설계 (진행 중)
+### Phase 3. 이미지 컷 분해 및 스크롤 시나리오 설계 (완료)
 - [x] `ADERIS®` 9개 제품/디테일 컷 좌표 분석 및 크롭/업스케일링 추출
 - [x] `Cellforge` `o` 포털 줌인 → `Forging a Brighter Tomorrow` 50% 확대 → 9개 컷 순차 노출 시나리오 확정
 
-### Phase 4. 프론트엔드 퍼블리싱 및 스크롤 애니메이션 구현 (진행 중)
-- [x] `assets/css/style.css` 애플 하이브리드 폰트 및 `320px ~ 1280px` 반응형 컨테이너 구축
+### Phase 4. 프론트엔드 퍼블리싱 및 스크롤 애니메이션 구현 (완료)
+- [x] `assets/css/style.css` 애플 하이브리드 폰트, 글래스모피즘 카드 및 `320px ~ 1280px` 반응형 컨테이너 구축
 - [x] 인트로 포털 섹션 및 `ADERIS®` 9개 컷 쇼케이스 HTML/CSS 마크업 구현
-- [x] `assets/js/animations.js` GSAP `ScrollTrigger` 기반 스크롤 동기화 구현
+- [x] `assets/js/animations.js` GSAP `ScrollTrigger` 기반 스크롤 동기화 및 자동 통과 구현
 
-### Phase 5. 검수 및 `main` 프로덕션 반영 (대기)
-- [ ] 로컬 서버(`npx live-server --port=8080`)에서 스크롤 감도 및 모바일 반응형 검수
-- [ ] `development` 브랜치 → `main` 브랜치 병합 및 프로덕션(`https://www.cellforge.kr`) 배포
+### Phase 5. 검수 및 `main` 프로덕션 반영 (완료)
+- [x] 로컬 서버(`npx live-server --port=8080`)에서 스크롤 감도 및 모바일 반응형 검수
+- [x] `development` 브랜치 → `main` 브랜치 병합 및 프로덕션(`https://www.cellforge.kr`) 배포
