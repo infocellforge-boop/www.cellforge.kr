@@ -1,21 +1,5 @@
 /**
  * Cellforge Scroll-Synchronized Animations (GSAP + ScrollTrigger)
- *
- * Scenario:
- * 1. Portal Intro (#intro-portal):
- *    - Starts with "Cellforge" centered on screen.
- *    - As the user scrolls, "Cellforge" grows to a threshold size (~2.1x).
- *    - Once it crosses the threshold size (scrolling down or up), it NEVER stops mid-zoom
- *      where rasterized/pixelated text could be seen: it automatically completes the pass-through
- *      of the letter 'o' and snaps the scroll past the portal transition zone.
- *    - After passing through 'o', "Forging a Brighter Tomorrow" responds to scroll and grows
- *      smoothly up to 50% of the screen width (50vw), then unpins and scrolls down into the ADERIS® cuts.
- * 2. Flagship Showcase (#flagship):
- *    - Scroll-synced reveal of ADERIS® main cut + sequential lit-up of the 4 core pillars.
- * 3. Lineup Showcase (#lineup):
- *    - Sticky split showcase syncing the 4 ADERIS® product cuts (Original, HA, PN, PN-HA) and ambient theme glow.
- * 4. Craftsmanship Bento (#craftsmanship):
- *    - Sequential scroll-synced stagger reveal of the 5 package detail cuts.
  */
 
 (function () {
@@ -68,75 +52,31 @@
   }
 
   /* ========================================================================
-     STAGE 1: Portal Intro Timeline with No-Stop Auto Pass-Through
+     STAGE 1: Portal Intro Timeline (Strict One-Way State Machine)
      ======================================================================== */
   if (portalSection && portalWord && portalSlogan) {
-    // State flag: whether "Cellforge" has burst through the 'o' portal
-    let hasPassedPortal = false;
+    // States:
+    // "START"   -> At top landing, "Cellforge" at scale 1.0 (or growing 1.0 -> 2.0 while scrolling down)
+    // "PASSED"  -> Passed through 'o', "Forging a Brighter Tomorrow" active
+    // "RETURNING" -> Scrolling back up to top; locked at scale 1.0 once settled so it never bounces
+    let portalState = "START";
+    let isTweeningPortal = false;
     let isAutoScrolling = false;
     let scrollStopTimer = null;
 
-    // Thresholds in the pinned ScrollTrigger progress (0.0 -> 1.0):
-    // - 0.00 ~ 0.14: "Cellforge" scales gently from 1.0x -> 2.1x (always crisp vector text)
-    // - > 0.14 (scrolling down): Auto-flies through 'o' (2.1x -> 80x & fades out) and snaps scroll to >= 0.36
-    // - < 0.34 (scrolling up):   Auto-flies back to 1.0x and snaps scroll to 0.0
-    // - 0.36 ~ 0.90: "Forging a Brighter Tomorrow" scales in response to scroll from tiny up to 50vw (scale 1.0)
-    // - 0.90 ~ 1.00: Brief hold at 50vw, then unpins and scrolls down into ADERIS® sections
-    const DOWN_TRIGGER = 0.14;
+    const DOWN_TRIGGER = 0.12;
     const UP_TRIGGER = 0.34;
     const SLOGAN_START = 0.36;
 
-    function flyThroughPortalDown() {
-      if (hasPassedPortal) return;
-      hasPassedPortal = true;
-
-      gsap.killTweensOf([portalWord, portalHint]);
-      gsap.to(portalHint, { opacity: 0, y: -16, duration: 0.2, overwrite: true });
-      gsap.to(portalWord, {
-        scale: 80,
-        opacity: 0,
-        duration: 0.38,
-        ease: "power3.in",
-        overwrite: true,
-      });
-    }
-
-    function flyBackPortalUp() {
-      if (!hasPassedPortal) return;
-      hasPassedPortal = false;
-
-      gsap.killTweensOf([portalWord, portalHint, portalSlogan]);
-      gsap.to(portalSlogan, {
-        opacity: 0,
-        scale: 0.08,
-        duration: 0.22,
-        ease: "power2.in",
-        overwrite: true,
-      });
-      gsap.fromTo(
-        portalWord,
-        { scale: 18, opacity: 0 },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 0.36,
-          ease: "power3.out",
-          overwrite: true,
-          clearProps: "scale",
-        }
-      );
-      gsap.to(portalHint, { opacity: 1, y: 0, duration: 0.3, delay: 0.1, overwrite: true });
-    }
-
     function snapScrollToProgress(st, targetProgress) {
-      if (isAutoScrolling) return;
       isAutoScrolling = true;
       const targetY = st.start + (st.end - st.start) * targetProgress;
 
       const scrollProxy = { y: window.scrollY };
+      gsap.killTweensOf(scrollProxy);
       gsap.to(scrollProxy, {
         y: targetY,
-        duration: 0.38,
+        duration: 0.36,
         ease: "power2.out",
         overwrite: true,
         onUpdate: () => window.scrollTo(0, scrollProxy.y),
@@ -144,6 +84,67 @@
           isAutoScrolling = false;
         },
       });
+    }
+
+    function flyThroughPortalDown(st) {
+      if (portalState === "PASSED") return;
+      portalState = "PASSED";
+      isTweeningPortal = true;
+
+      gsap.killTweensOf([portalWord, portalHint]);
+      gsap.to(portalHint, { opacity: 0, y: -16, duration: 0.18, overwrite: true });
+      gsap.to(portalWord, {
+        scale: 80,
+        opacity: 0,
+        duration: 0.36,
+        ease: "power3.in",
+        overwrite: true,
+        onComplete: () => {
+          isTweeningPortal = false;
+        },
+      });
+
+      if (st && st.progress < SLOGAN_START) {
+        snapScrollToProgress(st, SLOGAN_START + 0.02);
+      }
+    }
+
+    function flyBackPortalUp(st) {
+      if (portalState !== "PASSED") return;
+      // Set state to RETURNING so downward scrub (1.0 -> 2.0) does NOT fight or bounce while scrolling up
+      portalState = "RETURNING";
+      isTweeningPortal = true;
+
+      gsap.killTweensOf([portalWord, portalHint, portalSlogan]);
+      gsap.to(portalSlogan, {
+        opacity: 0,
+        scale: 0.08,
+        duration: 0.2,
+        ease: "power2.in",
+        overwrite: true,
+      });
+
+      gsap.fromTo(
+        portalWord,
+        { scale: 8, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.34,
+          ease: "power3.out",
+          overwrite: true,
+          onComplete: () => {
+            isTweeningPortal = false;
+            gsap.set(portalWord, { scale: 1, opacity: 1 });
+          },
+        }
+      );
+
+      gsap.to(portalHint, { opacity: 1, y: 0, duration: 0.28, delay: 0.08, overwrite: true });
+
+      if (st && st.progress > 0.01) {
+        snapScrollToProgress(st, 0);
+      }
     }
 
     ScrollTrigger.create({
@@ -157,51 +158,52 @@
         const p = self.progress;
         const dir = self.direction; // 1 = down, -1 = up
 
-        // 1. Before passing the portal (0.00 ~ DOWN_TRIGGER): gentle crisp scale 1.0 -> 2.1
-        if (!hasPassedPortal && p <= DOWN_TRIGGER) {
-          const t = p / DOWN_TRIGGER; // 0 -> 1
-          const currentScale = 1 + t * 1.1; // 1.0 -> 2.1
-          gsap.set(portalWord, { scale: currentScale, opacity: 1 });
-          gsap.set(portalHint, { opacity: 1 - t, y: -12 * t });
+        // Reset from RETURNING to START once back near the top or when user starts scrolling down again
+        if (portalState === "RETURNING" && (p <= 0.01 || (dir > 0 && !isTweeningPortal && !isAutoScrolling))) {
+          portalState = "START";
+        }
+
+        // 1. Only scrub-scale "Cellforge" (1.0 -> 2.0) when in START state and scrolling DOWN
+        if (portalState === "START" && !isTweeningPortal && p <= DOWN_TRIGGER) {
+          if (dir > 0) {
+            const t = p / DOWN_TRIGGER;
+            const currentScale = 1 + t * 1.0; // 1.0 -> 2.0
+            gsap.set(portalWord, { scale: currentScale, opacity: 1 });
+            gsap.set(portalHint, { opacity: 1 - t, y: -12 * t });
+          } else if (p <= 0.01) {
+            gsap.set(portalWord, { scale: 1, opacity: 1 });
+            gsap.set(portalHint, { opacity: 1, y: 0 });
+          }
           gsap.set(portalSlogan, { opacity: 0, scale: 0.08 });
         }
 
-        // 2. Crossing DOWN_TRIGGER going down -> burst through 'o' & auto-advance past transition zone
-        if (!hasPassedPortal && p > DOWN_TRIGGER && dir >= 0) {
-          flyThroughPortalDown();
-          if (p < SLOGAN_START) {
-            snapScrollToProgress(self, SLOGAN_START + 0.02);
-          }
+        // 2. Crossing DOWN_TRIGGER going down -> burst through 'o'
+        if (portalState !== "PASSED" && p > DOWN_TRIGGER && dir > 0) {
+          flyThroughPortalDown(self);
         }
 
-        // 3. Crossing UP_TRIGGER going up -> fly back to crisp Cellforge at top (0.0)
-        if (hasPassedPortal && p < UP_TRIGGER && dir < 0) {
-          flyBackPortalUp();
-          if (p > 0.01) {
-            snapScrollToProgress(self, 0);
-          }
+        // 3. Crossing UP_TRIGGER going up -> smoothly return to 1.0x at top without bouncing
+        if (portalState === "PASSED" && p < UP_TRIGGER && dir < 0) {
+          flyBackPortalUp(self);
         }
 
-        // 4. Safety net: if user stops scrolling anywhere in the transition zone (0.04 < p < SLOGAN_START),
-        //    never allow the scroll to rest mid-zoom.
+        // 4. Safety net if user stops mid-zone (0.03 < p < SLOGAN_START)
         clearTimeout(scrollStopTimer);
-        if (p > 0.04 && p < SLOGAN_START && !isAutoScrolling) {
+        if (p > 0.03 && p < SLOGAN_START && !isAutoScrolling && !isTweeningPortal) {
           scrollStopTimer = setTimeout(() => {
-            if (self.progress > 0.04 && self.progress < SLOGAN_START) {
-              if (self.direction >= 0) {
-                flyThroughPortalDown();
-                snapScrollToProgress(self, SLOGAN_START + 0.02);
+            if (self.progress > 0.03 && self.progress < SLOGAN_START) {
+              if (self.direction >= 0 && portalState === "START") {
+                flyThroughPortalDown(self);
               } else {
-                flyBackPortalUp();
-                snapScrollToProgress(self, 0);
+                portalState = "PASSED";
+                flyBackPortalUp(self);
               }
             }
           }, 60);
         }
 
-        // 5. After passing through 'o' (SLOGAN_START -> 0.88):
-        //    "Forging a Brighter Tomorrow" responds smoothly to scroll and grows to 50% viewport width (scale: 1)
-        if (hasPassedPortal && p >= UP_TRIGGER) {
+        // 5. Slogan phase (SLOGAN_START -> 0.88): grows smoothly up to 50% viewport width (scale: 1)
+        if (portalState === "PASSED" && p >= UP_TRIGGER) {
           const sloganProgress = gsap.utils.clamp(0, 1, (p - SLOGAN_START) / (0.88 - SLOGAN_START));
           const eased = gsap.parseEase("power2.out")(sloganProgress);
           const sloganScale = 0.12 + eased * 0.88; // 0.12 -> 1.00 (50vw)
@@ -221,16 +223,16 @@
         }
       },
       onLeave: () => {
-        if (!hasPassedPortal) {
-          flyThroughPortalDown();
+        if (portalState !== "PASSED") {
+          flyThroughPortalDown(null);
         }
         gsap.set(portalSlogan, { scale: 1, opacity: 1 });
       },
       onLeaveBack: () => {
-        if (hasPassedPortal) {
-          flyBackPortalUp();
-        }
-        gsap.set(portalWord, { scale: 1, opacity: 1, clearProps: "scale" });
+        portalState = "START";
+        isTweeningPortal = false;
+        gsap.killTweensOf([portalWord, portalSlogan]);
+        gsap.set(portalWord, { scale: 1, opacity: 1 });
         gsap.set(portalSlogan, { scale: 0.08, opacity: 0 });
       },
     });
