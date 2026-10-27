@@ -395,16 +395,34 @@ img {
 }
 
 .pillar-item {
+  position: relative;
   padding: 1.75rem 1.5rem;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  transition: border-color 0.35s ease, background-color 0.35s ease;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transition: border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
 }
 
 .pillar-item.is-lit {
-  background: rgba(212, 184, 149, 0.07);
-  border-color: rgba(212, 184, 149, 0.35);
+  background: linear-gradient(
+    135deg,
+    rgba(212, 184, 149, 0.14) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  border-color: rgba(212, 184, 149, 0.42);
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.55),
+    0 0 28px rgba(212, 184, 149, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
 }
 
 .pillar-index {
@@ -434,12 +452,18 @@ img {
 }
 
 /* ==========================================================================
-   STAGE 3: Sequential Product Lineup Section (Sticky Split Showcase)
+   STAGE 3: Sequential Product Lineup Section (Glassmorphism Sticky Showcase)
    ========================================================================== */
 .lineup-section {
   position: relative;
   padding-block: 7rem;
   background-color: var(--bg-primary);
+  /* Ambient colored light orbs so frosted glass cards refract rich depth */
+  background-image:
+    radial-gradient(circle at 75% 18%, rgba(212, 184, 149, 0.16) 0%, transparent 38%),
+    radial-gradient(circle at 22% 42%, rgba(122, 162, 196, 0.16) 0%, transparent 42%),
+    radial-gradient(circle at 78% 66%, rgba(133, 163, 146, 0.16) 0%, transparent 40%),
+    radial-gradient(circle at 28% 88%, rgba(166, 149, 199, 0.16) 0%, transparent 42%);
 }
 
 .lineup-split {
@@ -457,43 +481,52 @@ img {
 .lineup-preview-stage {
   position: relative;
   border-radius: 28px;
-  background: var(--bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   padding: 2rem;
   overflow: hidden;
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.6);
-  transition: border-color 0.4s ease;
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.28),
+    inset 0 0 32px rgba(255, 255, 255, 0.03);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .lineup-preview-stage[data-theme="gold"] {
-  border-color: rgba(212, 184, 149, 0.3);
+  border-color: rgba(212, 184, 149, 0.38);
 }
 .lineup-preview-stage[data-theme="blue"] {
-  border-color: rgba(122, 162, 196, 0.35);
+  border-color: rgba(122, 162, 196, 0.42);
 }
 .lineup-preview-stage[data-theme="green"] {
-  border-color: rgba(133, 163, 146, 0.35);
+  border-color: rgba(133, 163, 146, 0.42);
 }
 .lineup-preview-stage[data-theme="purple"] {
-  border-color: rgba(166, 149, 199, 0.35);
+  border-color: rgba(166, 149, 199, 0.42);
 }
 
 .lineup-glow {
   position: absolute;
   inset: -20%;
-  background: radial-gradient(circle at 50% 40%, rgba(212, 184, 149, 0.18), transparent 65%);
+  background: radial-gradient(circle at 50% 40%, rgba(212, 184, 149, 0.22), transparent 65%);
   pointer-events: none;
   transition: background 0.5s ease;
 }
 
 .lineup-preview-stage[data-theme="blue"] .lineup-glow {
-  background: radial-gradient(circle at 50% 40%, rgba(122, 162, 196, 0.22), transparent 65%);
+  background: radial-gradient(circle at 50% 40%, rgba(122, 162, 196, 0.26), transparent 65%);
 }
 .lineup-preview-stage[data-theme="green"] .lineup-glow {
-  background: radial-gradient(circle at 50% 40%, rgba(133, 163, 146, 0.22), transparent 65%);
+  background: radial-gradient(circle at 50% 40%, rgba(133, 163, 146, 0.26), transparent 65%);
 }
 .lineup-preview-stage[data-theme="purple"] .lineup-glow {
-  background: radial-gradient(circle at 50% 40%, rgba(166, 149, 199, 0.22), transparent 65%);
+  background: radial-gradient(circle at 50% 40%, rgba(166, 149, 199, 0.26), transparent 65%);
 }
 
 .lineup-frames {
@@ -503,6 +536,7 @@ img {
   border-radius: 18px;
   overflow: hidden;
   background-color: #09090b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .lineup-frame {
@@ -526,6 +560,8 @@ img {
 }
 
 .lineup-stage-caption {
+  position: relative;
+  z-index: 1;
   margin-top: 1.25rem;
   display: flex;
   align-items: center;
@@ -545,30 +581,129 @@ img {
   color: var(--fg-secondary);
 }
 
-/* Right Scroll Steps */
+/* Right Scroll Glassmorphic Cards */
 .lineup-steps-col {
   display: flex;
   flex-direction: column;
-  gap: 6rem;
+  gap: 5.5rem;
   padding-block: 2rem 6rem;
 }
 
 .lineup-step {
-  padding: 2.25rem;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  opacity: 0.38;
+  position: relative;
+  overflow: hidden;
+  padding: 2.35rem;
+  border-radius: 26px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(255, 255, 255, 0.025) 55%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.24),
+    inset 0 0 24px rgba(255, 255, 255, 0.02);
+  opacity: 0.5;
   transform: translateY(12px);
-  transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.4s ease,
-    background-color 0.4s ease;
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease,
+    border-color 0.45s ease,
+    background 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+/* Specular diagonal glass sheen on each lineup card */
+.lineup-step::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -25%;
+  width: 65%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+  pointer-events: none;
 }
 
 .lineup-step.is-active {
   opacity: 1;
   transform: translateY(0);
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.18);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.04) 60%,
+    rgba(255, 255, 255, 0.07) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow:
+    0 28px 64px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.38),
+    inset 0 0 32px rgba(255, 255, 255, 0.04);
+}
+
+.lineup-step.is-active[data-theme="gold"] {
+  background: linear-gradient(
+    135deg,
+    rgba(212, 184, 149, 0.16) 0%,
+    rgba(255, 255, 255, 0.04) 65%,
+    rgba(212, 184, 149, 0.06) 100%
+  );
+  border-color: rgba(212, 184, 149, 0.45);
+  box-shadow:
+    0 28px 64px rgba(0, 0, 0, 0.6),
+    0 0 36px rgba(212, 184, 149, 0.12),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.38);
+}
+
+.lineup-step.is-active[data-theme="blue"] {
+  background: linear-gradient(
+    135deg,
+    rgba(122, 162, 196, 0.18) 0%,
+    rgba(255, 255, 255, 0.04) 65%,
+    rgba(122, 162, 196, 0.07) 100%
+  );
+  border-color: rgba(122, 162, 196, 0.48);
+  box-shadow:
+    0 28px 64px rgba(0, 0, 0, 0.6),
+    0 0 36px rgba(122, 162, 196, 0.14),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.38);
+}
+
+.lineup-step.is-active[data-theme="green"] {
+  background: linear-gradient(
+    135deg,
+    rgba(133, 163, 146, 0.18) 0%,
+    rgba(255, 255, 255, 0.04) 65%,
+    rgba(133, 163, 146, 0.07) 100%
+  );
+  border-color: rgba(133, 163, 146, 0.48);
+  box-shadow:
+    0 28px 64px rgba(0, 0, 0, 0.6),
+    0 0 36px rgba(133, 163, 146, 0.14),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.38);
+}
+
+.lineup-step.is-active[data-theme="purple"] {
+  background: linear-gradient(
+    135deg,
+    rgba(166, 149, 199, 0.18) 0%,
+    rgba(255, 255, 255, 0.04) 65%,
+    rgba(166, 149, 199, 0.07) 100%
+  );
+  border-color: rgba(166, 149, 199, 0.48);
+  box-shadow:
+    0 28px 64px rgba(0, 0, 0, 0.6),
+    0 0 36px rgba(166, 149, 199, 0.14),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.38);
 }
 
 .lineup-step-mobile-img {
@@ -646,7 +781,10 @@ img {
 .craft-section {
   position: relative;
   padding-block: 7rem 8rem;
-  background: linear-gradient(180deg, #000000 0%, #0c0c10 100%);
+  background-color: #050507;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(212, 184, 149, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 80% 75%, rgba(122, 162, 196, 0.1) 0%, transparent 45%);
 }
 
 .craft-bento {
@@ -657,13 +795,31 @@ img {
 
 .craft-card {
   grid-column: span 2;
-  background-color: var(--bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.025) 100%
+  );
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.24);
   border-radius: 24px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   will-change: transform, opacity;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.craft-card:hover {
+  border-color: rgba(212, 184, 149, 0.38);
+  box-shadow:
+    0 24px 56px rgba(0, 0, 0, 0.6),
+    0 0 28px rgba(212, 184, 149, 0.1),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.32);
 }
 
 .craft-card-wide {
