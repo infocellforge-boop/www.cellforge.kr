@@ -3,52 +3,337 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cellforge</title>
-  <meta name="description" content="Cellforge 공식 웹사이트" />
-  <style>
-    :root {
-      --bg: #000000;
-      --fg: #f5f5f7;
-      --muted: #86868b;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background-color: var(--bg);
-      color: var(--fg);
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Pretendard", "Apple SD Gothic Neo", sans-serif;
-      -webkit-font-smoothing: antialiased;
-      text-align: center;
-      padding: 2rem;
-    }
-    h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      margin-bottom: 1rem;
-      background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    p {
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      color: var(--muted);
-      letter-spacing: -0.01em;
-    }
-  </style>
+  <title>Cellforge — Forging a Brighter Tomorrow</title>
+  <meta name="description" content="주식회사 셀포지(Cellforge) 공식 웹사이트 — ADERIS® Regenerative Aesthetic Matrix" />
+  <link rel="icon" href="./favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="./assets/img/icon-c.png" />
+  <link rel="apple-touch-icon" href="./assets/img/icon-c.png" />
+
+  <!-- Webfonts Fallback for Windows/Android: Inter (EN) & Pretendard Variable (KR) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+  />
+  <link
+    rel="stylesheet"
+    as="style"
+    crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+  />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 <body>
+  <!-- Top Minimal Glass Navigation -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="#" class="header-brand" aria-label="Cellforge 홈">
+        <img src="./assets/img/icon-c.png" alt="" class="header-logo" />
+        <span>CELLFORGE</span>
+      </a>
+      <nav class="header-nav" aria-label="주요 섹션 메뉴">
+        <a href="#flagship">ADERIS®</a>
+        <a href="#lineup">Lineup</a>
+        <a href="#craftsmanship">Craftsmanship</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
   <main>
-    <h1>Cellforge</h1>
-    <p>Official Website Coming Soon</p>
+    <!-- STAGE 1: Portal Intro (Zoom through 'o' of Cellforge -> 'Forging a Brighter Tomorrow' at 50% viewport) -->
+    <section class="portal-section" id="intro-portal" aria-label="Cellforge 인트로">
+      <div class="portal-stage">
+        <div class="portal-ambient" id="portal-ambient"></div>
+
+        <!-- Layer A: Cellforge word that scales through the hole of 'o' -->
+        <div class="portal-word-wrap" id="portal-word-wrap">
+          <h1 class="portal-word" id="portal-word">
+            Cellf<span class="portal-o" id="portal-o">o</span>rge
+          </h1>
+          <p class="portal-scroll-hint" id="portal-scroll-hint">
+            <span>Scroll to explore</span>
+            <span class="scroll-chevron" aria-hidden="true"></span>
+          </p>
+        </div>
+
+        <!-- Layer B: Slogan emerging from inside 'o' and growing to 50% of screen width -->
+        <div class="portal-slogan-wrap" id="portal-slogan-wrap">
+          <p class="portal-slogan" id="portal-slogan">
+            Forging a Brighter Tomorrow
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 2: Flagship Brand Showcase (Cut 1: ADERIS Main) -->
+    <section class="flagship-section" id="flagship">
+      <div class="container">
+        <div class="section-header" data-scroll-reveal>
+          <span class="eyebrow">FLAGSHIP BIOMATERIAL</span>
+          <h2 class="typo-headline text-gradient">ADERIS<sup class="reg-mark">&reg;</sup></h2>
+          <p class="typo-body-lg">
+            Adipose-Derived Extracellular Matrix Injectable
+          </p>
+        </div>
+
+        <div class="flagship-showcase" id="flagship-showcase">
+          <div class="flagship-visual-card" id="flagship-visual-card">
+            <img
+              src="./assets/img/products/aderis-main.jpg"
+              alt="ADERIS 20mg 패키지 및 바이알"
+              class="flagship-img"
+              id="flagship-img"
+            />
+          </div>
+
+          <!-- Scroll-synchronized lit-up pillar keywords -->
+          <div class="pillars-grid" id="pillars-grid">
+            <div class="pillar-item" data-pillar>
+              <span class="pillar-index">01</span>
+              <strong class="pillar-title">REGENERATE</strong>
+              <p class="pillar-desc">생체 친화적 세포외기질(ECM)을 통한 근본적 조직 재생 환경 구현</p>
+            </div>
+            <div class="pillar-item" data-pillar>
+              <span class="pillar-index">02</span>
+              <strong class="pillar-title">INTEGRATE</strong>
+              <p class="pillar-desc">인체 조직 구조와 자연스럽게 융화되는 고순도 매트릭스 설계</p>
+            </div>
+            <div class="pillar-item" data-pillar>
+              <span class="pillar-index">03</span>
+              <strong class="pillar-title">RESTORE</strong>
+              <p class="pillar-desc">손상된 미세 환경을 복원하고 본연의 볼륨과 탄력을 회복</p>
+            </div>
+            <div class="pillar-item" data-pillar>
+              <span class="pillar-index">04</span>
+              <strong class="pillar-title">NATURALLY</strong>
+              <p class="pillar-desc">20 mg 동결건조 파우더(Lyophilized Powder) 제형의 안정적 전달</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 3: Sequential Product Lineup Showcase (Cuts 1 ~ 4) -->
+    <section class="lineup-section" id="lineup">
+      <div class="container">
+        <div class="section-header" data-scroll-reveal>
+          <span class="eyebrow">PRODUCT LINEUP</span>
+          <h2 class="typo-headline">맞춤형 재생 에스테틱 포트폴리오</h2>
+          <p class="typo-body-lg">
+            핵심 ECM 베이스에 특화 유효 성분을 결합한 4가지 프로페셔널 라인업
+          </p>
+        </div>
+
+        <div class="lineup-split" id="lineup-split">
+          <!-- Left Sticky Visual Stage -->
+          <div class="lineup-sticky-col">
+            <div class="lineup-preview-stage" id="lineup-preview-stage" data-theme="gold">
+              <div class="lineup-glow" id="lineup-glow"></div>
+              <div class="lineup-frames">
+                <figure class="lineup-frame is-active" data-lineup-frame="0">
+                  <img src="./assets/img/products/aderis-main.jpg" alt="ADERIS Original" />
+                </figure>
+                <figure class="lineup-frame" data-lineup-frame="1">
+                  <img src="./assets/img/products/aderis-ha.jpg" alt="ADERIS HA" />
+                </figure>
+                <figure class="lineup-frame" data-lineup-frame="2">
+                  <img src="./assets/img/products/aderis-pn.jpg" alt="ADERIS PN" />
+                </figure>
+                <figure class="lineup-frame" data-lineup-frame="3">
+                  <img src="./assets/img/products/aderis-pn-ha.jpg" alt="ADERIS PN-HA" />
+                </figure>
+              </div>
+              <div class="lineup-stage-caption">
+                <span class="lineup-badge" id="lineup-stage-badge">SIGNATURE ECM</span>
+                <span class="lineup-spec">20 mg · 1 Vial · Lyophilized Powder</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Scrollable Spec Steps -->
+          <div class="lineup-steps-col">
+            <article class="lineup-step is-active" data-lineup-step="0" data-theme="gold" data-badge="SIGNATURE ECM">
+              <div class="lineup-step-mobile-img">
+                <img src="./assets/img/products/aderis-main.jpg" alt="ADERIS Original" />
+              </div>
+              <span class="step-tag tag-gold">Original Matrix</span>
+              <h3 class="typo-title">ADERIS<sup>&reg;</sup></h3>
+              <p class="step-formula">ADIPOSE-DERIVED EXTRACELLULAR MATRIX INJECTABLE</p>
+              <p class="step-desc">
+                지방유래 세포외기질(ECM) 원천 성분을 고순도로 정제한 시그니처 라인입니다.
+                조직 본연의 재생 환경을 재건하고 자연스러운 구조적 복원을 유도합니다.
+              </p>
+              <ul class="step-meta">
+                <li><strong>용량</strong> 20 mg / 1 Vial</li>
+                <li><strong>제형</strong> Lyophilized Powder (Professional Use Only)</li>
+              </ul>
+            </article>
+
+            <article class="lineup-step" data-lineup-step="1" data-theme="blue" data-badge="ECM + HYALURONIC ACID">
+              <div class="lineup-step-mobile-img">
+                <img src="./assets/img/products/aderis-ha.jpg" alt="ADERIS HA" />
+              </div>
+              <span class="step-tag tag-blue">Hydration &amp; Matrix</span>
+              <h3 class="typo-title">ADERIS<sup>&reg;</sup> HA</h3>
+              <p class="step-formula">ADIPOSE-DERIVED ECM + HYALURONIC ACID</p>
+              <p class="step-desc">
+                지방유래 ECM에 고분자 히알루론산(Hyaluronic Acid)을 결합하여
+                즉각적인 수분 보유력 강화와 세포외기질 환경 개선을 동시에 실현합니다.
+              </p>
+              <ul class="step-meta">
+                <li><strong>용량</strong> 20 mg / 1 Vial</li>
+                <li><strong>핵심 배합</strong> Adipose-Derived ECM + HA</li>
+              </ul>
+            </article>
+
+            <article class="lineup-step" data-lineup-step="2" data-theme="green" data-badge="ECM + POLYNUCLEOTIDE">
+              <div class="lineup-step-mobile-img">
+                <img src="./assets/img/products/aderis-pn.jpg" alt="ADERIS PN" />
+              </div>
+              <span class="step-tag tag-green">Cellular Vitality</span>
+              <h3 class="typo-title">ADERIS<sup>&reg;</sup> PN</h3>
+              <p class="step-formula">ADIPOSE-DERIVED ECM + POLYNUCLEOTIDE (PN)</p>
+              <p class="step-desc">
+                생체 적합성이 뛰어난 폴리뉴클레오타이드(PN)와 지방유래 ECM의 시너지로
+                피부 조직의 치밀도와 재생 활력을 한층 끌어올립니다.
+              </p>
+              <ul class="step-meta">
+                <li><strong>용량</strong> 20 mg / 1 Vial</li>
+                <li><strong>핵심 배합</strong> Adipose-Derived ECM + PN</li>
+              </ul>
+            </article>
+
+            <article class="lineup-step" data-lineup-step="3" data-theme="purple" data-badge="ECM + PN + HA">
+              <div class="lineup-step-mobile-img">
+                <img src="./assets/img/products/aderis-pn-ha.jpg" alt="ADERIS PN-HA" />
+              </div>
+              <span class="step-tag tag-purple">Triple Synergy Complex</span>
+              <h3 class="typo-title">ADERIS<sup>&reg;</sup> PN-HA</h3>
+              <p class="step-formula">ADIPOSE-DERIVED ECM + PN + HYALURONIC ACID</p>
+              <p class="step-desc">
+                ECM, PN, 히알루론산 3가지 핵심 성분을 이상적인 비율로 통합한 토탈 리제너레이션 솔루션으로,
+                구조 복원·재생 활성·보습 볼륨을 한 번에 제공합니다.
+              </p>
+              <ul class="step-meta">
+                <li><strong>용량</strong> 20 mg / 1 Vial</li>
+                <li><strong>핵심 배합</strong> Adipose-Derived ECM + PN + HA</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STAGE 4: Craftsmanship & Package Details (Cuts 5 ~ 9 Sequential Reveal) -->
+    <section class="craft-section" id="craftsmanship">
+      <div class="container">
+        <div class="section-header" data-scroll-reveal>
+          <span class="eyebrow">DESIGN &amp; CRAFTSMANSHIP</span>
+          <h2 class="typo-headline">디테일로 완성된 프리미엄 아이덴티티</h2>
+          <p class="typo-body-lg">
+            바이오 기술의 정교함과 조직의 유기적 흐름을 담아낸 패키지 디자인
+          </p>
+        </div>
+
+        <div class="craft-bento" id="craft-bento">
+          <!-- Cut 5 -->
+          <article class="craft-card" data-craft-card>
+            <div class="craft-img-wrap">
+              <img src="./assets/img/products/detail-cap.jpg" alt="프리미엄 캡 디자인" loading="lazy" />
+            </div>
+            <div class="craft-body">
+              <span class="craft-num">01</span>
+              <h3 class="craft-title">프리미엄 캡 디자인</h3>
+              <p class="craft-desc">브랜드 아이덴티티 각인</p>
+            </div>
+          </article>
+
+          <!-- Cut 6 -->
+          <article class="craft-card" data-craft-card>
+            <div class="craft-img-wrap">
+              <img src="./assets/img/products/detail-finish.jpg" alt="고급 후가공" loading="lazy" />
+            </div>
+            <div class="craft-body">
+              <span class="craft-num">02</span>
+              <h3 class="craft-title">고급 후가공</h3>
+              <p class="craft-desc">엠보싱 + 부분 유광</p>
+            </div>
+          </article>
+
+          <!-- Cut 7 -->
+          <article class="craft-card" data-craft-card>
+            <div class="craft-img-wrap">
+              <img src="./assets/img/products/detail-side.jpg" alt="측면 디테일" loading="lazy" />
+            </div>
+            <div class="craft-body">
+              <span class="craft-num">03</span>
+              <h3 class="craft-title">측면 디테일</h3>
+              <p class="craft-desc">미니멀한 브랜드 심볼</p>
+            </div>
+          </article>
+
+          <!-- Cut 8 -->
+          <article class="craft-card craft-card-wide" data-craft-card>
+            <div class="craft-img-wrap">
+              <img src="./assets/img/products/detail-inner.jpg" alt="패키지 내부" loading="lazy" />
+            </div>
+            <div class="craft-body">
+              <span class="craft-num">04</span>
+              <h3 class="craft-title">패키지 내부</h3>
+              <p class="craft-desc">정제된 구조와 컬러 톤 (Regenerative Aesthetic Matrix)</p>
+            </div>
+          </article>
+
+          <!-- Cut 9 -->
+          <article class="craft-card craft-card-wide" data-craft-card>
+            <div class="craft-img-wrap">
+              <img src="./assets/img/products/detail-motif.jpg" alt="브랜드 그래픽 모티프" loading="lazy" />
+            </div>
+            <div class="craft-body">
+              <span class="craft-num">05</span>
+              <h3 class="craft-title">브랜드 그래픽 모티프</h3>
+              <p class="craft-desc">조직의 자연스러운 흐름을 형상화</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <!-- STAGE 5: Corporate Footer -->
+  <footer class="site-footer" id="contact">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="./assets/img/icon-c.png" alt="Cellforge 로고" class="footer-logo" />
+        <span class="footer-brand-name">CELLFORGE</span>
+      </div>
+      <address class="footer-info">
+        <div class="footer-info-row">
+          <span><strong>법인명</strong> 주식회사 셀포지</span>
+          <span class="footer-sep" aria-hidden="true">|</span>
+          <span><strong>대표자</strong> 이창섭(공동대표), 강가운(공동대표)</span>
+          <span class="footer-sep" aria-hidden="true">|</span>
+          <span><strong>사업자등록번호</strong> 544-81-04072</span>
+        </div>
+        <div class="footer-info-row">
+          <span><strong>주소</strong> 경기도 수원시 영통구 월드컵로 123, 107호(원천동, 승전빌딩)</span>
+          <span class="footer-sep" aria-hidden="true">|</span>
+          <span><strong>이메일</strong> <a href="mailto:info.cellforge@gmail.com" class="footer-email-link">info.cellforge@gmail.com</a></span>
+        </div>
+      </address>
+      <div class="footer-bottom">
+        <p class="footer-copy">Copyright &copy; 2026 CELLFORGE Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GSAP & ScrollTrigger CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="./assets/js/animations.js"></script>
 </body>
 </html>

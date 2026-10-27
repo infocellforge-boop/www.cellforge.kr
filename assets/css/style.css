@@ -1,0 +1,1072 @@
+/* ==========================================================================
+   Cellforge Design System, Layout & Apple-Style Scroll Experience
+   ========================================================================== */
+
+:root {
+  /* Color Palette (Apple Dark Keynote + ADERIS Champagne/Bio Accents) */
+  --bg-primary: #000000;
+  --bg-elevated: #0d0d10;
+  --bg-card: #141418;
+  --fg-primary: #f5f5f7;
+  --fg-secondary: #98989f;
+  --fg-muted: #6e6e73;
+
+  /* Product Theme Accents */
+  --gold-accent: #d4b895;
+  --blue-accent: #7aa2c4;
+  --green-accent: #85a392;
+  --purple-accent: #a695c7;
+
+  /* Layout & Container Constraints */
+  --container-max-width: 1280px;
+  --container-min-width: 320px;
+  --container-pad-x: 2.5rem;
+  --header-height: 52px;
+
+  /* Apple Hybrid Font Stack */
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter",
+    "Apple SD Gothic Neo", "Pretendard Variable", "Pretendard", system-ui, sans-serif;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter",
+    "Apple SD Gothic Neo", "Pretendard Variable", "Pretendard", system-ui, sans-serif;
+
+  /* Typography Scale (Responsive Clamp) */
+  --text-hero: clamp(3rem, 8vw, 6.5rem);
+  --text-headline: clamp(2rem, 4.2vw, 3.5rem);
+  --text-title: clamp(1.375rem, 2.4vw, 2rem);
+  --text-body-lg: clamp(1rem, 1.4vw, 1.25rem);
+  --text-body: 1rem;
+  --text-caption: 0.875rem;
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  min-width: var(--container-min-width);
+  background-color: var(--bg-primary);
+  color: var(--fg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  min-width: var(--container-min-width);
+  background-color: var(--bg-primary);
+  color: var(--fg-primary);
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  overflow-x: clip;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ==========================================================================
+   Content Container (Min 320px ~ Max 1280px)
+   ========================================================================== */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  min-width: var(--container-min-width);
+  margin-inline: auto;
+  padding-inline: var(--container-pad-x);
+}
+
+/* ==========================================================================
+   Top Glass Navigation Header
+   ========================================================================== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--header-height);
+  background-color: rgba(0, 0, 0, 0.72);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: opacity 0.3s ease;
+}
+
+.header-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--fg-primary);
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.header-logo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.header-nav a {
+  color: var(--fg-secondary);
+  text-decoration: none;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+}
+
+.header-nav a:hover {
+  color: var(--fg-primary);
+}
+
+/* ==========================================================================
+   Typography Utilities
+   ========================================================================== */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-accent);
+  margin-bottom: 0.75rem;
+}
+
+.typo-hero {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+
+.typo-headline {
+  font-family: var(--font-display);
+  font-size: var(--text-headline);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.typo-title {
+  font-family: var(--font-display);
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.typo-body-lg {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-lg);
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: -0.015em;
+  color: var(--fg-secondary);
+}
+
+.text-gradient {
+  background: linear-gradient(180deg, #ffffff 0%, #c8b8a6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.reg-mark {
+  font-size: 0.4em;
+  vertical-align: super;
+  margin-left: 0.08em;
+  color: var(--gold-accent);
+  -webkit-text-fill-color: var(--gold-accent);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 4rem;
+}
+
+.section-header .typo-headline {
+  margin-bottom: 0.875rem;
+}
+
+/* ==========================================================================
+   STAGE 1: Portal Intro Section (Cellforge 'o' Zoom -> 50vw Slogan)
+   ========================================================================== */
+.portal-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+}
+
+.portal-stage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.portal-ambient {
+  position: absolute;
+  width: 65vw;
+  height: 65vw;
+  max-width: 760px;
+  max-height: 760px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(212, 184, 149, 0.16) 0%,
+    rgba(41, 151, 255, 0.06) 45%,
+    rgba(0, 0, 0, 0) 72%
+  );
+  filter: blur(40px);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.portal-word-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.portal-word {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 11vw, 8.5rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  color: var(--fg-primary);
+  white-space: nowrap;
+  user-select: none;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.portal-o {
+  display: inline-block;
+  color: #ffffff;
+}
+
+.portal-scroll-hint {
+  position: absolute;
+  bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.scroll-chevron {
+  width: 10px;
+  height: 10px;
+  border-right: 1.5px solid var(--fg-secondary);
+  border-bottom: 1.5px solid var(--fg-secondary);
+  transform: rotate(45deg);
+  animation: pulseDown 1.8s infinite ease-in-out;
+}
+
+@keyframes pulseDown {
+  0%, 100% {
+    transform: translateY(-3px) rotate(45deg);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateY(4px) rotate(45deg);
+    opacity: 0.9;
+  }
+}
+
+/* Slogan Layer: Target scale(1) occupies 50% of the viewport width (50vw) */
+.portal-slogan-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.portal-slogan {
+  width: 50vw;
+  min-width: 280px;
+  max-width: 960px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4.2vw, 4rem);
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -0.03em;
+  background: linear-gradient(180deg, #ffffff 0%, #d4b895 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+  transform: scale(0.08);
+  will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   STAGE 2: Flagship Brand Section (Cut 1: ADERIS Main)
+   ========================================================================== */
+.flagship-section {
+  position: relative;
+  padding-block: 7rem 6rem;
+  background: linear-gradient(180deg, #000000 0%, #0b0b0e 100%);
+}
+
+.flagship-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.flagship-visual-card {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  background-color: var(--bg-card);
+  border: 1px solid rgba(212, 184, 149, 0.18);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.65);
+  will-change: transform, opacity;
+}
+
+.flagship-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* 4 Core Value Pillars */
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.pillar-item {
+  position: relative;
+  padding: 1.75rem 1.5rem;
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transition: border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+}
+
+.pillar-item.is-lit {
+  background: linear-gradient(
+    135deg,
+    rgba(212, 184, 149, 0.14) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  border-color: rgba(212, 184, 149, 0.42);
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.55),
+    0 0 28px rgba(212, 184, 149, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+
+.pillar-index {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--gold-accent);
+  margin-bottom: 0.625rem;
+}
+
+.pillar-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--fg-primary);
+  margin-bottom: 0.5rem;
+}
+
+.pillar-desc {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--fg-secondary);
+}
+
+/* ==========================================================================
+   STAGE 3: Sequential Product Lineup Section (Glassmorphism Sticky Showcase)
+   ========================================================================== */
+.lineup-section {
+  position: relative;
+  padding-block: 7rem;
+  background-color: var(--bg-primary);
+  /* Ambient colored light orbs so frosted glass cards refract rich depth */
+  background-image:
+    radial-gradient(circle at 75% 18%, rgba(212, 184, 149, 0.16) 0%, transparent 38%),
+    radial-gradient(circle at 22% 42%, rgba(122, 162, 196, 0.16) 0%, transparent 42%),
+    radial-gradient(circle at 78% 66%, rgba(133, 163, 146, 0.16) 0%, transparent 40%),
+    radial-gradient(circle at 28% 88%, rgba(166, 149, 199, 0.16) 0%, transparent 42%);
+}
+
+.lineup-split {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.lineup-sticky-col {
+  position: sticky;
+  top: calc(var(--header-height) + 2.5rem);
+}
+
+.lineup-preview-stage {
+  position: relative;
+  border-radius: 28px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 2rem;
+  overflow: hidden;
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.28),
+    inset 0 0 32px rgba(255, 255, 255, 0.03);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.lineup-preview-stage[data-theme="gold"] {
+  border-color: rgba(212, 184, 149, 0.38);
+}
+.lineup-preview-stage[data-theme="blue"] {
+  border-color: rgba(122, 162, 196, 0.42);
+}
+.lineup-preview-stage[data-theme="green"] {
+  border-color: rgba(133, 163, 146, 0.42);
+}
+.lineup-preview-stage[data-theme="purple"] {
+  border-color: rgba(166, 149, 199, 0.42);
+}
+
+.lineup-glow {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(circle at 50% 40%, rgba(212, 184, 149, 0.22), transparent 65%);
+  pointer-events: none;
+  transition: background 0.5s ease;
+}
+
+.lineup-preview-stage[data-theme="blue"] .lineup-glow {
+  background: radial-gradient(circle at 50% 40%, rgba(122, 162, 196, 0.26), transparent 65%);
+}
+.lineup-preview-stage[data-theme="green"] .lineup-glow {
+  background: radial-gradient(circle at 50% 40%, rgba(133, 163, 146, 0.26), transparent 65%);
+}
+.lineup-preview-stage[data-theme="purple"] .lineup-glow {
+  background: radial-gradient(circle at 50% 40%, rgba(166, 149, 199, 0.26), transparent 65%);
+}
+
+.lineup-frames {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 18px;
+  overflow: hidden;
+  background-color: #09090b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lineup-frame {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lineup-frame.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.lineup-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lineup-stage-caption {
+  position: relative;
+  z-index: 1;
+  margin-top: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.8125rem;
+}
+
+.lineup-badge {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--fg-primary);
+}
+
+.lineup-spec {
+  color: var(--fg-secondary);
+}
+
+/* Right Scroll Glassmorphic Cards */
+.lineup-steps-col {
+  display: flex;
+  flex-direction: column;
+  gap: 5.5rem;
+  padding-block: 2rem 6rem;
+}
+
+.lineup-step {
+  position: relative;
+  overflow: hidden;
+  padding: 2.35rem;
+  border-radius: 26px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(255, 255, 255, 0.025) 55%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.24),
+    inset 0 0 24px rgba(255, 255, 255, 0.02);
+  opacity: 0.5;
+  transform: translateY(12px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease,
+    border-color 0.45s ease,
+    background 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+/* Specular diagonal glass sheen on each lineup card */
+.lineup-step::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -25%;
+  width: 65%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.55),
+    transparent
+  );
+  pointer-events: none;
+}
+
+.lineup-step.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.04) 60%,
+    rgba(255, 255, 255, 0.07) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow:
+    0 28px 64px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.38),
+    inset 0 0 32px rgba(255, 255, 255, 0.04);
+}
+
+.lineup-step.is-active[data-theme="gold"] {
+  background: linear-gradient(
+    135deg,
+    rgba(212, 184, 149, 0.16) 0%,
+    rgba(255, 255, 255, 0.04) 65%,
+    rgba(212, 184, 149, 0.06) 100%
+  );
+  border-color: rgba(212, 184, 149, 0.45);
+  box-shadow:
+    0 28px 64px rgba(0, 0, 0, 0.6),
+    0 0 36px rgba(212, 184, 149, 0.12),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.38);
+}
+
+.lineup-step.is-active[data-theme="blue"] {
+  background: linear-gradient(
+    135deg,
+    rgba(122, 162, 196, 0.18) 0%,
+    rgba(255, 255, 255, 0.04) 65%,
+    rgba(122, 162, 196, 0.07) 100%
+  );
+  border-color: rgba(122, 162, 196, 0.48);
+  box-shadow:
+    0 28px 64px rgba(0, 0, 0, 0.6),
+    0 0 36px rgba(122, 162, 196, 0.14),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.38);
+}
+
+.lineup-step.is-active[data-theme="green"] {
+  background: linear-gradient(
+    135deg,
+    rgba(133, 163, 146, 0.18) 0%,
+    rgba(255, 255, 255, 0.04) 65%,
+    rgba(133, 163, 146, 0.07) 100%
+  );
+  border-color: rgba(133, 163, 146, 0.48);
+  box-shadow:
+    0 28px 64px rgba(0, 0, 0, 0.6),
+    0 0 36px rgba(133, 163, 146, 0.14),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.38);
+}
+
+.lineup-step.is-active[data-theme="purple"] {
+  background: linear-gradient(
+    135deg,
+    rgba(166, 149, 199, 0.18) 0%,
+    rgba(255, 255, 255, 0.04) 65%,
+    rgba(166, 149, 199, 0.07) 100%
+  );
+  border-color: rgba(166, 149, 199, 0.48);
+  box-shadow:
+    0 28px 64px rgba(0, 0, 0, 0.6),
+    0 0 36px rgba(166, 149, 199, 0.14),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.38);
+}
+
+.lineup-step-mobile-img {
+  display: none;
+  margin-bottom: 1.25rem;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.step-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  margin-bottom: 0.875rem;
+}
+
+.tag-gold {
+  color: var(--gold-accent);
+  background: rgba(212, 184, 149, 0.12);
+}
+.tag-blue {
+  color: var(--blue-accent);
+  background: rgba(122, 162, 196, 0.14);
+}
+.tag-green {
+  color: var(--green-accent);
+  background: rgba(133, 163, 146, 0.14);
+}
+.tag-purple {
+  color: var(--purple-accent);
+  background: rgba(166, 149, 199, 0.14);
+}
+
+.step-formula {
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--fg-primary);
+  margin-top: 0.35rem;
+  margin-bottom: 1rem;
+  opacity: 0.85;
+}
+
+.step-desc {
+  font-size: 0.96875rem;
+  line-height: 1.65;
+  color: var(--fg-secondary);
+  margin-bottom: 1.25rem;
+}
+
+.step-meta {
+  list-style: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  color: var(--fg-secondary);
+}
+
+.step-meta strong {
+  color: var(--fg-primary);
+  margin-right: 0.5rem;
+}
+
+/* ==========================================================================
+   STAGE 4: Craftsmanship & Package Detail 5 Cuts (Bento Grid)
+   ========================================================================== */
+.craft-section {
+  position: relative;
+  padding-block: 7rem 8rem;
+  background-color: #050507;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(212, 184, 149, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 80% 75%, rgba(122, 162, 196, 0.1) 0%, transparent 45%);
+}
+
+.craft-bento {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.5rem;
+}
+
+.craft-card {
+  grid-column: span 2;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.025) 100%
+  );
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.24);
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  will-change: transform, opacity;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.craft-card:hover {
+  border-color: rgba(212, 184, 149, 0.38);
+  box-shadow:
+    0 24px 56px rgba(0, 0, 0, 0.6),
+    0 0 28px rgba(212, 184, 149, 0.1),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.32);
+}
+
+.craft-card-wide {
+  grid-column: span 3;
+}
+
+.craft-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 12;
+  overflow: hidden;
+  background-color: #1a1918;
+}
+
+.craft-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.craft-card:hover .craft-img-wrap img {
+  transform: scale(1.05);
+}
+
+.craft-body {
+  padding: 1.5rem 1.75rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.craft-num {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--gold-accent);
+}
+
+.craft-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--fg-primary);
+}
+
+.craft-desc {
+  font-size: 0.9375rem;
+  color: var(--fg-secondary);
+}
+
+/* ==========================================================================
+   STAGE 5: Minimal Corporate Footer
+   ========================================================================== */
+.site-footer {
+  background-color: var(--bg-elevated);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--fg-secondary);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  padding-block: 2.5rem;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.footer-logo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.footer-brand-name {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--fg-primary);
+}
+
+.footer-info {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.footer-info-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.625rem;
+}
+
+.footer-info strong {
+  color: var(--fg-primary);
+  font-weight: 500;
+  margin-right: 0.25rem;
+}
+
+.footer-sep {
+  color: rgba(255, 255, 255, 0.16);
+  user-select: none;
+}
+
+.footer-email-link {
+  color: var(--fg-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(255, 255, 255, 0.24);
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.footer-email-link:hover {
+  color: var(--fg-primary);
+  text-decoration-color: var(--fg-primary);
+}
+
+.footer-bottom {
+  padding-top: 0.875rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--fg-muted);
+  font-size: 0.75rem;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints (Max 1280px ~ Min 320px)
+   ========================================================================== */
+
+/* Tablet (<= 1024px) */
+@media (max-width: 1024px) {
+  :root {
+    --container-pad-x: 2rem;
+  }
+
+  .pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lineup-split {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .craft-card {
+    grid-column: span 3;
+  }
+
+  .craft-card-wide {
+    grid-column: span 3;
+  }
+}
+
+/* Mobile (<= 768px) */
+@media (max-width: 768px) {
+  :root {
+    --container-pad-x: 1.5rem;
+  }
+
+  .header-nav {
+    gap: 1rem;
+  }
+
+  .header-nav a {
+    font-size: 0.75rem;
+  }
+
+  .portal-slogan {
+    width: 80vw;
+  }
+
+  .flagship-section,
+  .lineup-section,
+  .craft-section {
+    padding-block: 4.5rem;
+  }
+
+  .pillars-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lineup-split {
+    grid-template-columns: 1fr;
+  }
+
+  .lineup-sticky-col {
+    display: none;
+  }
+
+  .lineup-steps-col {
+    gap: 2rem;
+    padding-block: 0;
+  }
+
+  .lineup-step {
+    opacity: 1;
+    transform: none;
+    padding: 1.5rem;
+  }
+
+  .lineup-step-mobile-img {
+    display: block;
+  }
+
+  .craft-bento {
+    grid-template-columns: 1fr;
+  }
+
+  .craft-card,
+  .craft-card-wide {
+    grid-column: span 1;
+  }
+
+  .site-footer {
+    padding-block: 2rem;
+  }
+
+  .footer-sep {
+    display: none;
+  }
+
+  .footer-info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+}
+
+/* Small Mobile (<= 480px, locked down to 320px min-width) */
+@media (max-width: 480px) {
+  :root {
+    --container-pad-x: 1.25rem;
+  }
+
+  .header-nav a:nth-child(3) {
+    display: none;
+  }
+}
